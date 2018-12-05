@@ -6,25 +6,34 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as gameActions from '../../redux/store/modules/game';
 
+import './style.css';
+
 class RGObjectCore extends Component {
 	
 	state = {
+		position: {
+			x: 50, y: 50, z: 0
+		},
 		children: []
 	};
-	
-	constructor() {
-		super();
-	}
 
-	addChild(child) {
+	addChild = (child) => {
 		this.setState({
 			children: this.state.children.concat(child)
 		});
-	}
-	
+	};
+
 	render() {
+		
+		let { position } 	= this.state;
+		
+		var style = {
+			left: 	position.x,
+			top: 	position.y,
+		};
+		
 		return (
-			<div className="object">
+			<div className="object" style={style}>
 			</div>
 		);
 	}
@@ -35,7 +44,7 @@ class RGObjectCore extends Component {
 // Connecting Redux state to component.
 export default connect(
 	(state) => ({ 		// redux state
-		number: state.game.number
+		camera: state.game.camera
 	}), 
 	(dispatch) => ({ 	// redux action
 		GameActions: bindActionCreators(gameActions, dispatch)

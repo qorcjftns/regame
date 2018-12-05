@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
 import { Provider } from 'react-redux';
 
-import RGEngineCore from './engine/core/RGEngineCore/RGEngineCore';
-import RGObjectCore from './engine/object/RGObjectCore/RGObjectCore';
+import RGEngineCore from './engine/core/RGEngineCore';
+import RGObjectCore from './engine/object/RGObjectCore';
 import store from './engine/redux/store';
 
 class App extends Component {
