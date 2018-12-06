@@ -1,39 +1,76 @@
 
 import React, { Component } from 'react';
 
-import { connect } from 'react-redux';
-
-import { bindActionCreators } from 'redux';
-import * as gameActions from '../../redux/store/modules/game';
-
 import './style.css';
 
 class RGObjectCore extends Component {
 	
 	state = {
 		position: {
-			x: 50, y: 50, z: 0
+			x: 0, y: 0, z: 0
 		},
-		children: []
+		properties: [],
 	};
+	
+	children = [];
+	childrenRef = [];
+
+	run() {
+		this.processProperties();
+		this.processObject();
+		this.processChildren();
+	}
+
+	processProperties() {
+		var len = this.state.properties.length;
+		for(var i = 0 ; i < len ; i++) {
+			this.state.properties[i].run();
+		}
+	}
+
+	// empty
+	processObject() {
+		return;
+	}
+
+	processChildren() {
+		var len = this.childrenRef.length;
+		for(var i = 0 ; i < len ; i++) {
+			this.childrenRef[i].run();
+		}
+	}
 
 	addChild = (child) => {
-		this.setState({
-			children: this.state.children.concat(child)
-		});
+		this.children.push(child);
+	};
+
+	addChildRef = (childRef) => {
+		this.childrenRef.push(childRef);
+	};
+
+	onRef = (ref) => {this.addChildRef(ref)};
+
+	componentDidMount() {
+		this.props.onRef(this);
+	}
+	componentWillUnmount() {
+		this.props.onRef(undefined);
+	}
+
+	calculatePosition = () => {
+		let { position } 	= this.state;
+		return {
+			left: 	position.x,
+			top: 	position.y,
+		};	
 	};
 
 	render() {
 		
-		let { position } 	= this.state;
-		
-		var style = {
-			left: 	position.x,
-			top: 	position.y,
-		};
+		var position = this.calculatePosition();
 		
 		return (
-			<div className="object" style={style}>
+			<div className="RGObject" style={position}>
 			</div>
 		);
 	}
@@ -42,11 +79,4 @@ class RGObjectCore extends Component {
 }
 
 // Connecting Redux state to component.
-export default connect(
-	(state) => ({ 		// redux state
-		camera: state.game.camera
-	}), 
-	(dispatch) => ({ 	// redux action
-		GameActions: bindActionCreators(gameActions, dispatch)
-	})
-)(RGObjectCore);
+export default RGObjectCore;

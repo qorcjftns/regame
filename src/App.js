@@ -4,29 +4,27 @@ import './App.css';
 
 import { Provider } from 'react-redux';
 
-import RGEngineCore from './engine/core/RGEngineCore';
-import RGObjectCore from './engine/object/RGObjectCore';
 import store from './engine/redux/store';
+
+import RGObjectGame from './engine/object/RGObjectGame';
 
 class App extends Component {
 	
-	constructor() {
-		super();
-		this.engine = new RGEngineCore();
-		
-		// Initialize
-		this.engine.setGame(<RGObjectCore />);
-	}
-	
 	render() {
+		let game = <RGObjectGame onRef={(ref) => {this.game = ref}}/>;
 		return (
 			<Provider store={store}>
 				<div className="App">
-					{ this.engine.game }
+					{game}
 				</div>
 			</Provider>
 		);
 	}
+	
+	componentDidMount() {
+		this.game.run();
+	}
+	
 }
 
 export default App;
