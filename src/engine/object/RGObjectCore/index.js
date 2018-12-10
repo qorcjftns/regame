@@ -4,19 +4,6 @@ import React, { Component } from 'react';
 import './style.css';
 
 class RGObjectCore extends Component {
-	
-	state = {
-		position: {
-			x: 0, y: 0, z: 0
-		},
-		movement: {
-			x: 0, y: 0, z: 0
-		}
-	};
-	
-	children = [];
-	childrenRef = [];
-	components = [];
 
 	run() {
 		this.processComponents();
@@ -43,6 +30,36 @@ class RGObjectCore extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.props.onRef(this);
+	}
+	componentWillUnmount() {
+		this.props.onRef(undefined);
+	}
+
+	render() {
+		
+		var position = this.calculatePosition();
+		
+		return (
+			<div className="RGObject" style={position}>
+			</div>
+		);
+	}
+	
+	state = {
+		position: {
+			x: 0, y: 0, z: 0
+		},
+		movement: {
+			x: 0, y: 0, z: 0
+		}
+	};
+	
+	children = [];
+	childrenRef = [];
+	components = [];
+
 	addComponent = (child) => {
 		this.components.push(child);
 	};
@@ -57,13 +74,6 @@ class RGObjectCore extends Component {
 
 	onRef = (ref) => {this.addChildRef(ref)};
 
-	componentDidMount() {
-		this.props.onRef(this);
-	}
-	componentWillUnmount() {
-		this.props.onRef(undefined);
-	}
-
 	calculatePosition = () => {
 		let { position } 	= this.state;
 		return {
@@ -71,17 +81,6 @@ class RGObjectCore extends Component {
 			top: 	position.y,
 		};	
 	};
-
-	render() {
-		
-		var position = this.calculatePosition();
-		
-		return (
-			<div className="RGObject" style={position}>
-			</div>
-		);
-	}
-	
 	
 }
 
