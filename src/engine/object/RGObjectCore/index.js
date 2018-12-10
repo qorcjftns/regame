@@ -49,6 +49,9 @@ class RGObjectCore extends Component {
 	}
 	
 	state = {
+		size: {
+			x: 100, y: 100, z: 0
+		},
 		position: {
 			x: 0, y: 0, z: 0
 		},
@@ -76,8 +79,10 @@ class RGObjectCore extends Component {
 	onRef = (ref) => {this.addChildRef(ref)};
 
 	calculatePosition = () => {
-		let { position } 	= this.state;
+		let { position, size } 	= this.state;
 		return {
+			width: 	size.x,
+			height: size.y,
 			left: 	position.x,
 			top: 	position.y,
 		};	

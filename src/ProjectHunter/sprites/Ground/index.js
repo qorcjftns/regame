@@ -20,6 +20,10 @@ class Ground extends RGObjectSprite {
 			position: {
 				x: 0,
 				y: 500
+			},
+			size: {
+				x: "100%",
+				y: 30
 			}
 		});
 	}
