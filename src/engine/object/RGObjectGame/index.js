@@ -2,8 +2,6 @@
 import React from 'react';
 import RGObjectCore from '../RGObjectCore';
 
-import { connect } from 'react-redux';
-
 // eslint-disable-next-line
 import { bindActionCreators } from 'redux';
 // eslint-disable-next-line

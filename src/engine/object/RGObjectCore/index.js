@@ -5,28 +5,29 @@ import './style.css';
 
 class RGObjectCore extends Component {
 
-	run() {
-		this.processComponents();
-		this.processObject();
-		this.processChildren();
+	run(physics) {
+		this.processComponents(physics);
+		this.processObject(physics);
+		this.processChildren(physics);
 	}
 
-	processComponents() {
+	processComponents(physics) {
 		var len = this.components.length;
 		for(var i = 0 ; i < len ; i++) {
-			this.components[i].run();
+			this.components[i].run(physics);
 		}
 	}
 
 	// empty
-	processObject() {
+	processObject(physics) {
 		return;
 	}
 
-	processChildren() {
+	processChildren(physics) {
 		var len = this.childrenRef.length;
 		for(var i = 0 ; i < len ; i++) {
-			this.childrenRef[i].run();
+			if(this.childrenRef[i] !== undefined)
+				this.childrenRef[i].run(physics);
 		}
 	}
 

@@ -1,5 +1,5 @@
 
-
+import RGEnginePhysics from '../RGEnginePhysics';
 
 class RGEngineCore {
 	
@@ -13,6 +13,11 @@ class RGEngineCore {
 		// initialize
 		this.FPS = 60;
 		this.interval = 1000 / this.FPS;
+		
+		// Physics engine
+		
+		this.physicsCore = new RGEnginePhysics();
+		this.physicsCore.setGame(this.game);
 	}
 	
 	// Setters
@@ -30,7 +35,7 @@ class RGEngineCore {
 	
 	loop() {
 		setInterval(() => {
-			this.game.run();
+			this.game.run(this.physicsCore);
 		}, this.interval);
 	}
 	

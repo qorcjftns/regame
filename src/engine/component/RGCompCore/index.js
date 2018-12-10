@@ -5,7 +5,7 @@ class RGCompCore {
 		this.obj = obj;
 	}
 	
-	run() {
+	run(physics) {
 		
 	}
 	
