@@ -9,8 +9,6 @@ import { bindActionCreators } from 'redux';
 // eslint-disable-next-line
 import * as gameActions from '../../redux/store/modules/game';
 
-import RGObjectScene from '../RGObjectScene';
-
 import RGEngineCore from '../../core/RGEngineCore';
 
 import './style.css';
@@ -25,9 +23,11 @@ class RGObjectGame extends RGObjectCore {
 		this.engineCore.setGame(this);
 		this.engineCore.loop();
 		
-		// Initializes child components
-		this.addChild(<RGObjectScene key="MainScene" onRef={this.onRef}/>);
+		this.init();
+		
 	}
+	
+	init() {}
 	
 	processObject() {
 		// console.log("running game...");
@@ -43,11 +43,4 @@ class RGObjectGame extends RGObjectCore {
 	
 }
 
-export default connect(
-	(state) => ({
-		
-	}),
-	(props) => ({
-		
-	})
-)(RGObjectGame);
+export default RGObjectGame;

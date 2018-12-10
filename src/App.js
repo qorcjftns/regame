@@ -6,12 +6,12 @@ import { Provider } from 'react-redux';
 
 import store from './engine/redux/store';
 
-import RGObjectGame from './engine/object/RGObjectGame';
+import Game from './ProjectHunter/core/Game';
 
 class App extends Component {
 	
 	render() {
-		let game = <RGObjectGame onRef={(ref) => {this.game = ref}}/>;
+		let game = <Game onRef={(ref) => {this.game = ref}}/>;
 		return (
 			<Provider store={store}>
 				<div className="App">

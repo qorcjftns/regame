@@ -4,15 +4,19 @@ import RGObjectCore from '../RGObjectCore';
 
 import { connect } from 'react-redux';
 
-import RGObjectSprite from '../RGObjectSprite';
-
 import './style.css';
 
 class RGObjectScene extends RGObjectCore {
 	
 	constructor() {
 		super();
-		this.addChild(<RGObjectSprite key="Character" onRef={this.onRef}/>);
+		
+		// init
+		this.init();
+	}
+	
+	init() {
+		
 	}
 	
 	processObject() {
@@ -29,11 +33,4 @@ class RGObjectScene extends RGObjectCore {
 	
 }
 
-export default connect(
-	(state) => ({
-		
-	}),
-	(props) => ({
-		
-	})
-)(RGObjectScene);
+export default RGObjectScene;

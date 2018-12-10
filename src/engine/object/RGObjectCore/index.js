@@ -9,22 +9,25 @@ class RGObjectCore extends Component {
 		position: {
 			x: 0, y: 0, z: 0
 		},
-		properties: [],
+		movement: {
+			x: 0, y: 0, z: 0
+		}
 	};
 	
 	children = [];
 	childrenRef = [];
+	components = [];
 
 	run() {
-		this.processProperties();
+		this.processComponents();
 		this.processObject();
 		this.processChildren();
 	}
 
-	processProperties() {
-		var len = this.state.properties.length;
+	processComponents() {
+		var len = this.components.length;
 		for(var i = 0 ; i < len ; i++) {
-			this.state.properties[i].run();
+			this.components[i].run();
 		}
 	}
 
@@ -39,6 +42,10 @@ class RGObjectCore extends Component {
 			this.childrenRef[i].run();
 		}
 	}
+
+	addComponent = (child) => {
+		this.components.push(child);
+	};
 
 	addChild = (child) => {
 		this.children.push(child);
